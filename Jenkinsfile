@@ -4,8 +4,9 @@ pipeline {
     maven 'M2_HOME'
   }
   environment {
-    registry = "docker_hub_account/repository_name"
-    registry = 'dockerhub'
+    registry = "noamessi/devop-pipeline"
+    registry = 'DockerID'
+  }
   stages {
     stage('Build') {
       steps {
@@ -22,7 +23,8 @@ pipeline {
     }
     stage('deploy') {
       steps {
-        echo "deploy step"
+        scripts {
+          docker.build registry + ":$BUILD_NUMBER"
       }
     }
   }
