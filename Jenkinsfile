@@ -5,7 +5,7 @@ pipeline {
   }
   environment {
     registry = "noamessi/devop-pipeline"
-    registry = 'DockerID'
+    registryCredential = 'DockerID'
   }
   stages {
     stage('Build') {
@@ -23,7 +23,7 @@ pipeline {
     }
     stage('deploy') {
       steps {
-        scripts {
+        script {
           docker.build registry + ":$BUILD_NUMBER"
         }
       }
